@@ -1,6 +1,6 @@
-exports.Cms = require('./cms')
-exports.CmsCache = require('./cmsCache')
-exports.Validator = require('./validator')
-exports.Schemas = require('./schemas')
-exports.Middleware = require('./middleware')
-exports.Routes = require('./config/routes')
+export { CmsSpool } from './CmsSpool'
+export { Cms } from './cms'
+export { Validator } from './validator'
+export { Schemas } from './schemas'
+export { Middleware } from './middleware'
+

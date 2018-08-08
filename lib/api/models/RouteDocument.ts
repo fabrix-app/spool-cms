@@ -1,4 +1,5 @@
 import { FabrixModel as Model } from '@fabrix/fabrix/dist/common'
+import { SequelizeResolver } from '@fabrix/spool-sequelize'
 import { SERIES } from '../../enums'
 
 /**
@@ -6,6 +7,10 @@ import { SERIES } from '../../enums'
  * @description Route Document model
  */
 export class RouteDocument extends Model {
+
+  static get resolver() {
+    return SequelizeResolver
+  }
 
   static config (app, Sequelize) {
     return {

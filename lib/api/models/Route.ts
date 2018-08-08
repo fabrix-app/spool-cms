@@ -1,10 +1,15 @@
 import { FabrixModel as Model } from '@fabrix/fabrix/dist/common'
+import { SequelizeResolver } from '@fabrix/spool-sequelize'
 
 /**
  * @module Route
  * @description Route model
  */
 export class Route extends Model {
+
+  static get resolver() {
+    return SequelizeResolver
+  }
 
   static config(app, Sequelize) {
     return {

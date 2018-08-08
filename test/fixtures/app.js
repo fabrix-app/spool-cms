@@ -2,10 +2,10 @@
 const _ = require('lodash')
 const smokesignals = require('smokesignals')
 const fs = require('fs')
-const ModelPassport = require('@fabrix/spool-passport/dist/api/models/User').User
-const ModelPermissions = require('@fabriix/spool-permissions/api/models/User').User
-const lib = require('../../lib/index')
-const Controller = require('@fabrix/fabrix/dist/common')
+// const ModelPassport = require('@fabrix/spool-passport/dist/api/models/User').User
+// const ModelPermissions = require('@fabrix/spool-permissions/api/models/User').User
+const lib = require('../../dist/index')
+const Controller = require('@fabrix/fabrix/dist/common').FabrixController
 const fsStore = require('cache-manager-fs')
 
 
@@ -31,17 +31,15 @@ const App = {
       sqlitedev: {
         orm: 'sequelize',
         database: 'Sequelize',
-        storage: './test/jsdata.sqlite',
         host: '127.0.0.1',
-        dialect: 'sqlite',
+        dialect: 'postgres',
         migrate: 'drop'
       },
       uploads: {
         orm: 'sequelize',
         database: 'Sequelize',
-        storage: './test/test.uploads.sqlite',
         host: '127.0.0.1',
-        dialect: 'sqlite',
+        dialect: 'postgres',
         migrate: 'drop'
       }
     },
@@ -80,14 +78,17 @@ const App = {
     main: {
       spools: [
         require('@fabrix/spool-router').RouterSpool,
+        require('@fabrix/spool-sequelize').SequelizeSpool,
         require('@fabrix/spool-express').ExpressSpool,
-        require('@fabrix/spool-engine').EngineSpool,
+        require('@fabrix/spool-email').EmailSpool,
         require('@fabrix/spool-generics').GenericsSpool,
         require('@fabrix/spool-passport').PassportSpool,
         require('@fabrix/spool-permissions').PermissionsSpool,
+        // require('@fabrix/spool-notifications').NotificationsSpool,
+        require('@fabrix/spool-engine').EngineSpool,
         require('@fabrix/spool-sitemap').SitemapSpool,
         require('@fabrix/spool-caches').CachesSpool,
-        require('../../dist').CmsSpool // spool-proxy-route
+        require('../../dist').CmsSpool // spool-cms
       ]
     },
     web: {

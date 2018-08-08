@@ -18,7 +18,11 @@ export class CmsSpool extends ExtensionSpool {
       api: api
     })
 
-    this._cms = { cache: {} }
+    this._cms = {
+      cache: {},
+      alternateRoutes: [],
+      ignoreRoutes: []
+    }
 
     this.extensions = {
       cms: {
@@ -72,7 +76,6 @@ export class CmsSpool extends ExtensionSpool {
    */
   async configure () {
     return Promise.all([
-      Cms.config(this.app),
       Cms.resolveGenerics(this.app),
       Cms.copyDefaults(this.app),
     ])

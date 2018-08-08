@@ -35,10 +35,10 @@ export const Schemas = {
     // Cache
     cache: joi.object().keys({
       prefix: joi.string().required(),
-      allow: joi.boolean().required(),
+      allow: joi.any(), // .boolean(), // .required(),
       eject: joi.number().required()
     }),
-    multisite: joi.alternatives().try(joi.boolean(), joi.array().items(joi.string())).required()
+    multisite: joi.alternatives().try(joi.any() /* joi.boolean()*/ , joi.array().items(joi.string())).required()
   }),
 
   // Validate web.middlewares

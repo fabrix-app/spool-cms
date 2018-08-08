@@ -1,13 +1,14 @@
 import { FabrixService as Service } from '@fabrix/fabrix/dist/common'
-const _ = require('lodash')
-const path = require('path')
-const fs = require('fs')
-const mkdirp = require('mkdirp')
-const rmdir = require('rmdir')
+import { ModelError } from '@fabrix/spool-sequelize/dist/errors'
+import * as _ from 'lodash'
+import * as path from 'path'
+import * as fs from 'fs'
+import * as mkdirp from 'mkdirp'
+import * as rmdir from 'rmdir'
+import * as vc from 'version_compare'
 import { SERIES } from '../../enums'
 import { EXTENSIONS } from '../../enums'
-const vc = require('version_compare')
-const Errors = require('proxy-engine-errors')
+
 
 /**
  * @module RouterFLService
@@ -146,11 +147,11 @@ export class RouterFLService extends Service {
     }
     return this.sequence(toTry, checkTrial)
       .then(() => {
-        if (chosenPath && _.values(EXTENSIONS).indexOf(path.extname(chosenPath.path) !== -1)) {
+        if (chosenPath && Object.values(EXTENSIONS).indexOf(path.extname(chosenPath.path)) !== -1) {
           return fs.readFileSync(chosenPath.path, 'utf8')
         }
         else {
-          throw new Errors.FoundError(Error(`${pagePath} and ${alternatePath} are not qualified resources`))
+          throw new ModelError('E_NOT_FOUND', `${pagePath} and ${alternatePath} are not qualified resources`)
         }
       })
       .then(doc => {
@@ -225,7 +226,7 @@ export class RouterFLService extends Service {
         catch (err) {
           return reject(err)
         }
-        if (directories.length > SERIES.length) {
+        if (directories.length > Object.values(SERIES).length) {
           const err = new Error('You have exceeded the amount of available series numbers')
           return reject(err)
         }
@@ -318,7 +319,7 @@ export class RouterFLService extends Service {
       }
       const dirParts = path.normalize(dir).split('/')
       // Remove the test folder from the path
-      if (_.values(SERIES).indexOf(dirParts[dirParts.length - 1] !== -1)) {
+      if (Object.values(SERIES).indexOf(dirParts[dirParts.length - 1]) !== -1) {
         dirParts.splice(-1, 1)
       }
       // Remove the series folder of the path
@@ -553,7 +554,7 @@ export class RouterFLService extends Service {
    * @param callback
    * @returns {*}
    */
-  sequence(objectsArray, iterator, callback) {
+  sequence(objectsArray, iterator, callback = null) {
     const startPromise = objectsArray.reduce((prom, object) => {
       return prom.then(function () {
         return iterator(object)

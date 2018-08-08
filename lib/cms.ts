@@ -1,8 +1,8 @@
 import { FabrixApp } from '@fabrix/fabrix'
 import { RenderGeneric } from '@fabrix/generics-render'
-const _ = require('lodash')
+import { clone } from 'lodash'
 
-export const cms = {
+export const Cms = {
   /**
    * init - Initialize
    * @param app
@@ -22,11 +22,11 @@ export const cms = {
    * @param app
    */
   ignoreRoutes: (app: FabrixApp) => {
-    app.cms.ignoreRoutes = []
+    // app.cms.ignoreRoutes = []
 
     // app.config.routes.forEach((route) => {
     //   // If the route is not a GET route
-    //   if (route.method !== 'GET' && (_.isObject(route.method) && route.method.indexOf('GET') == -1)) {
+    //   if (route.method !== 'GET' && (isObject(route.method) && route.method.indexOf('GET') == -1)) {
     //     return
     //   }
     //   // If route has a config with ignore
@@ -44,11 +44,11 @@ export const cms = {
    * @param app
    */
   alternateRoutes: (app: FabrixApp) => {
-    app.cms.alternateRoutes = []
+    // app.cms.alternateRoutes = []
 
     // app.config.routes.forEach((route) => {
     //   // If the route is not a GET route
-    //   if (route.method !== 'GET' && (_.isObject(route.method) && route.method.indexOf('GET') === -1)) {
+    //   if (route.method !== 'GET' && (isObject(route.method) && route.method.indexOf('GET') === -1)) {
     //     return
     //   }
     //   // If route has a config with ignore
@@ -94,8 +94,8 @@ export const cms = {
    * @param app
    * @returns {Promise.<{}>}
    */
-  copyDefaults: (app) => {
-    app.config.set('cmsDefaults', _.clone(app.config.get('cms')))
+  copyDefaults: (app: FabrixApp) => {
+    app.config.set('cmsDefaults', clone(app.config.get('cms')))
     return Promise.resolve({})
   }
 }

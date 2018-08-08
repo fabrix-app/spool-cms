@@ -1,8 +1,6 @@
-/* eslint no-console: [0, { allow: ["log","warn", "error"] }] */
+import { defaults } from 'lodash'
 
-'use strict'
-const _ = require('lodash')
-module.exports = {
+export const Middleware = {
   cms: function (req, res, next) {
 
     const RouterService = req.fabrixApp.services.RouterService
@@ -20,7 +18,7 @@ module.exports = {
             route.cached_at = new Date()
 
             // req.cms = route
-            // req.locals = _.defaults(req.locals, { cms: req.cms })
+            // req.locals = defaults(req.locals, { cms: req.cms })
             //
             // // Log Time
             // t1 = process.hrtime(t0)
@@ -50,7 +48,7 @@ module.exports = {
           // set request cms attribute
           req.cms = cms
           // set the locals (used in ejs and other template engines)
-          req.locals = _.defaults(req.locals, { cms: req.cms })
+          req.locals = defaults(req.locals, { cms: req.cms })
           // Log Time
           t1 = process.hrtime(t0)
           t = t1[1] / 1e6

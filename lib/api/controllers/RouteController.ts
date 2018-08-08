@@ -1,6 +1,6 @@
 import { FabrixController as Controller } from '@fabrix/fabrix/dist/common'
+import { Validator } from '../../validator'
 
-const lib = require('../../lib')
 // const _ = require('lodash')
 /**
  * @module RouteController
@@ -68,7 +68,7 @@ export class RouteController extends Controller {
    */
   addPage(req, res) {
     const RouterService = this.app.services.RouterService
-    lib.Validator.validatePageData(req.body)
+    Validator.validatePageData(req.body)
       .then(values => {
         return RouterService.addPage(req.body)
       })
@@ -88,7 +88,7 @@ export class RouteController extends Controller {
    */
   editPage(req, res) {
     const RouterService = this.app.services.RouterService
-    lib.Validator.validatePageData(req.body)
+    Validator.validatePageData(req.body)
       .then(values => {
         return RouterService.editPage(req.body)
       })
@@ -107,7 +107,7 @@ export class RouteController extends Controller {
    */
   removePage(req, res) {
     const RouterService = this.app.services.RouterService
-    lib.Validator.validatePageRemoveData(req.body)
+    Validator.validatePageRemoveData(req.body)
       .then(values => {
         return RouterService.removePage(req.body)
       })
@@ -126,7 +126,7 @@ export class RouteController extends Controller {
    */
   addSeries(req, res) {
     const RouterService = this.app.services.RouterService
-    lib.Validator.validateSeriesData(req.body)
+    Validator.validateSeriesData(req.body)
       .then(values => {
         return RouterService.addSeries(req.body)
       })
@@ -145,7 +145,7 @@ export class RouteController extends Controller {
    */
   removeSeries(req, res) {
     const RouterService = this.app.services.RouterService
-    lib.Validator.validateSeriesRemoveData(req.body)
+    Validator.validateSeriesRemoveData(req.body)
       .then(values => {
         return RouterService.removeSeries(req.body)
       })
@@ -164,7 +164,7 @@ export class RouteController extends Controller {
    */
   editSeries(req, res) {
     const RouterService = this.app.services.RouterService
-    lib.Validator.validateSeriesEditData(req.body)
+    Validator.validateSeriesEditData(req.body)
       .then(values => {
         return RouterService.editSeries(req.body)
       })
@@ -186,7 +186,7 @@ export class RouteController extends Controller {
     // Type query validated by route
     const type = req.query.type
     // Validate the control data
-    lib.Validator.validateControlData(req.body)
+    Validator.validateControlData(req.body)
       .then(values => {
         return RouterControlsService[type](req.body)
       })

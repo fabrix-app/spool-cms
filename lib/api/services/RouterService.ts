@@ -1,9 +1,7 @@
 // tslint:disable:max-line-length
 import { FabrixService as Service } from '@fabrix/fabrix/dist/common'
 import { ModelError } from '@fabrix/spool-sequelize/dist/errors'
-
-const pathToRegexp = require('path-to-regexp')
-const Errors = require('proxy-engine-errors')
+import * as pathToRegexp from 'path-to-regexp'
 
 /**
  * @module RouterService
@@ -167,7 +165,7 @@ export class RouterService extends Service {
     return Promise.resolve()
       .then(() => {
         if (this.app.config.get('cms.force_fl')) {
-          throw new Errors.ValidationError(Error('RouterService.findPageByID is disabled while cms.force_fl is true'))
+          throw new ModelError('E_BAD_REQUEST', 'RouterService.findPageByID is disabled while cms.force_fl is true')
         }
         return Route.findById(id, {transaction: options.transaction || null})
           .then(_route => {
@@ -190,7 +188,7 @@ export class RouterService extends Service {
     return Promise.resolve()
       .then(() => {
         if (this.app.config.get('cms.force_fl')) {
-          throw new Errors.ValidationError(Error('RouterService.findPageByPath is disabled while cms.force_fl is true'))
+          throw new ModelError('E_BAD_REQUEST', 'RouterService.findPageByPath is disabled while cms.force_fl is true')
         }
 
         path = path.split('?')[0]
@@ -239,7 +237,7 @@ export class RouterService extends Service {
       // If this is a forced lookup
       if (lookup) {
         if (this.app.config.get('cms.force_fl')) {
-          const err = new Errors.ValidationError(Error('RouterService.resolveIdentifier lookup == true is disabled while cms.force_fl is true'))
+          const err = new ModelError('E_BAD_REQUEST', 'RouterService.resolveIdentifier lookup == true is disabled while cms.force_fl is true')
           return reject(err)
         }
         this[lookupFunc](identifier)
@@ -272,7 +270,7 @@ export class RouterService extends Service {
 
     // Resolve the identifier
     return this.resolveIdentifier(data.identifier, null)
-      .then(identifier => {
+      .then((identifier: {[key: string]: any}) => {
         this.app.log.debug('routerservice:addPage identifier', identifier)
         if (!identifier || !identifier.path) {
           throw new ModelError('E_NOT_FOUND', `Can not resolve ${data.identifier}, make sure it is in "path" format eg. '/hello/world'`)
@@ -295,7 +293,7 @@ export class RouterService extends Service {
       })
       .then(_isCreated => {
         if (_isCreated) {
-          throw new Errors.ConflictError(Error(`${regPath} is already created, use RouterController.editPage or RouterService.editPage instead`))
+          throw new ModelError('E_BAD_REQUEST', `${regPath} is already created, use RouterController.editPage or RouterService.editPage instead`)
         }
         return this.createPage(pagePath, regPath, {})
       })
@@ -361,7 +359,7 @@ export class RouterService extends Service {
       let regPath
 
       this.resolveIdentifier(data.identifier, !this.app.config.get('cms.force_fl'))
-        .then(identifier => {
+        .then((identifier: {[key: string]: any}) => {
           this.app.log.debug('routerservice:updatePage', identifier)
           if (!identifier.path && !identifier.id) {
             throw new Error(`Can not resolve ${data.identifier}, make sure it is in "path" format eg. '/hello/world' or as an ID eg. '123'`)
@@ -447,7 +445,7 @@ export class RouterService extends Service {
       let pagePath
       let regPath
       this.resolveIdentifier(data.identifier, !this.app.config.get('cms.force_fl'))
-        .then(identifier => {
+        .then((identifier: {[key: string]: any}) => {
           this.app.log.debug('routerservice:removePage', identifier)
           if (!identifier.path && !identifier.id) {
             throw new ModelError('E_NOT_FOUND', `Can not resolve ${data.identifier}, make sure it is in "path" format eg. '/hello/world' or as an ID eg. '123'`)
@@ -530,7 +528,7 @@ export class RouterService extends Service {
       const RouterFLService = this.app.services.RouterFLService
       const RouterDBService = this.app.services.RouterDBService
       this.resolveIdentifier(data.identifier, !this.app.config.get('cms.force_fl'))
-        .then(identifier => {
+        .then((identifier: {[key: string]: any}) => {
           this.app.log.debug('routerservice:addSeries identifier', identifier)
           if (!identifier.path && !identifier.id) {
             throw new ModelError('E_NOT_FOUND', `Can not resolve ${data.identifier}, make sure it is in "path" format eg. '/hello/world'`)
@@ -616,7 +614,7 @@ export class RouterService extends Service {
       const RouterFLService = this.app.services.RouterFLService
       const RouterDBService = this.app.services.RouterDBService
       this.resolveIdentifier(data.identifier, !this.app.config.get('cms.force_fl'))
-        .then(identifier => {
+        .then((identifier: {[key: string]: any}) => {
           this.app.log.debug('routerservice:editSeries identifier', identifier)
           if (!identifier.path && !identifier.id) {
             throw new ModelError('E_NOT_FOUND', `Can not resolve ${data.identifier}, make sure it is in "path" format eg. '/hello/world'`)
@@ -705,7 +703,7 @@ export class RouterService extends Service {
       const RouterFLService = this.app.services.RouterFLService
       const RouterDBService = this.app.services.RouterDBService
       this.resolveIdentifier(data.identifier, !this.app.config.get('cms.force_fl'))
-        .then(identifier => {
+        .then((identifier: {[key: string]: any}) => {
           this.app.log.debug('routerservice:addSeries identifier', identifier)
           if (!identifier.path && !identifier.id) {
             throw new ModelError('E_NOT_FOUND', `Can not resolve ${data.identifier}, make sure it is in "path" format eg. '/hello/world'`)

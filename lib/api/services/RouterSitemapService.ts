@@ -11,6 +11,9 @@ import { FabrixService as Service } from '@fabrix/fabrix/dist/common'
  * @description Build Sitemap
  */
 export class RouterSitemapService extends Service {
+  public pwd
+  public flat
+
   constructor(app) {
     super(app)
     // Flat Map
@@ -39,8 +42,8 @@ export class RouterSitemapService extends Service {
     const pwdPath = path.resolve(pwd)
     const pwdStat = fs.statSync(pwd)
     const files = fs.readdirSync(pwd)
-    const output = {}
-    let meta = {}
+    const output: {[key: string]: any} = {}
+    let meta: {[key: string]: any} = {}
     let compiled
 
     // TODO Make it use latest series

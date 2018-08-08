@@ -1,4 +1,5 @@
 import { FabrixModel as Model } from '@fabrix/fabrix/dist/common'
+import { SequelizeResolver } from '@fabrix/spool-sequelize'
 
 /**
  * @module RouteControl
@@ -6,6 +7,10 @@ import { FabrixModel as Model } from '@fabrix/fabrix/dist/common'
  * @generator Treefrog for Fabrix.js Model.
  */
 export class RouteControl extends Model {
+
+  static get resolver() {
+    return SequelizeResolver
+  }
 
   static config (app, Sequelize) {
     return {

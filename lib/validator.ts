@@ -1,4 +1,5 @@
 import * as joi from 'joi'
+import { ModelError } from '@fabrix/spool-sequelize/dist/errors'
 import { Schemas } from './schemas/index'
 
 export const Validator = {
@@ -38,7 +39,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.pageData, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -48,7 +49,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.pageRemoveData, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -59,7 +60,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.seriesData, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -69,7 +70,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.seriesEditData, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -79,7 +80,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.seriesRemoveData, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -91,7 +92,7 @@ export const Validator = {
       // console.log(middlewares.order)
       joi.validate(data, Schemas.addRun, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -103,7 +104,7 @@ export const Validator = {
       // console.log(middlewares.order)
       joi.validate(data, Schemas.controlData, (err, value) => {
         if (err) {
-          return reject(new Errors.ValidationError(err))
+          return reject(new ModelError('BAD_REQUEST', err))
         }
         return resolve(value)
       })
