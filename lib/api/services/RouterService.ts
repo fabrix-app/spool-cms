@@ -34,6 +34,7 @@ export class RouterService extends Service {
    * @param req
    * @returns {Promise.<*>}
    */
+  // TODO this needs to really speed up
   setPreReqRoute(req) {
     const prefix = this.app.config.get('cms.prefix') || this.app.config.get('router.prefix')
     const url = req.originalUrl.replace(prefix, '')
@@ -147,7 +148,7 @@ export class RouterService extends Service {
    */
   resolveProxyRoute(req) {
     if (req.route && req.route.cached) {
-      this.app.log.debug('USING CACHED ROUTE', req.route.path, req.route.cached_at)
+      this.app.log.debug('cms.cache', req.route.path, req.route.cached_at)
       return req.route
     }
     if (this.app.config.get('cms.force_fl')) {
