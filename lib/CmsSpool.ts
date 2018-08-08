@@ -20,8 +20,9 @@ export class CmsSpool extends ExtensionSpool {
 
     this._cms = {
       cache: {},
-      alternateRoutes: [],
-      ignoreRoutes: []
+      getRoutes: new Map,
+      alternateRoutes: new Map,
+      ignoreRoutes: new Map
     }
 
     this.extensions = {
@@ -87,6 +88,7 @@ export class CmsSpool extends ExtensionSpool {
   async initialize () {
     return Promise.all([
       Cms.init(this.app),
+      Cms.getRoutes(this.app),
       Cms.ignoreRoutes(this.app),
       Cms.alternateRoutes(this.app)
     ])

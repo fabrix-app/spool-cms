@@ -24,9 +24,9 @@ describe('RouteController', () => {
       .send({
         identifier: '/hello/:world'
       })
-      .expect(409)
+      .expect(400) // TODO Used to be a 409
       .end((err, res) => {
-        assert.equal(res.text, 'Error: /hello/:world is already created, use RouterController.editPage or RouterService.editPage instead')
+        assert.equal(res.text, '/hello/:world is already created, use RouterController.editPage or RouterService.editPage instead')
         done(err)
       })
   })
@@ -39,7 +39,7 @@ describe('RouteController', () => {
       })
       .expect(404)
       .end((err, res) => {
-        assert.equal(res.text, 'Error: /hello/mercury does not exist and can not be updated')
+        assert.equal(res.text, '/hello/mercury does not exist and can not be updated')
         done(err)
       })
   })

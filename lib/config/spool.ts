@@ -6,6 +6,20 @@
 export const spool = {
   type: 'extension',
   /**
+   * API and config resources provided by this Spool.
+   */
+  provides: {
+    resources: ['controllers', 'services', 'models'],
+    api: {
+      controllers: ['RouteController'],
+      services: [
+        'RouterControlsService',
+      ],
+      models: ['Event', 'EventItem', 'EventSubscriber']
+    },
+    config: [ 'engine', 'routes' ]
+  },
+  /**
    * Configure the lifecycle of this pack; that is, how it boots up, and which
    * order it loads relative to other spools.
    */
@@ -17,7 +31,8 @@ export const spool = {
        */
       listen: [
         // 'spool:engine:configured',
-        // 'spool:generics:configured',
+        'spool:router:configured',
+        'spool:generics:configured'
       ],
 
       /**
@@ -33,7 +48,8 @@ export const spool = {
         // 'spool:router:initialized'
         // Should wait til after proxy engine has been initialized
         // 'spool:engine:initialized',
-        // 'spool:generics:initialized'
+        'spool:router:initialized',
+        'spool:generics:initialized'
       ],
       emit: [
         // 'spool:cms:initialized'

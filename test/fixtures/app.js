@@ -50,12 +50,26 @@ const App = {
     routes: {
       '/html': {
         'GET': {
-          handler: 'RouteController.view'
+          handler: 'RouteController.view',
+          config: {
+            app: {
+              cms: {
+                include: true
+              }
+            }
+          }
         }
       },
       '/hello/:world': {
         'GET': {
-          handler: 'RouteController.view'
+          handler: 'RouteController.view',
+          config: {
+            app: {
+              cms: {
+                include: true
+              }
+            }
+          }
         }
       },
       '/hello/ignore': {
@@ -71,7 +85,14 @@ const App = {
       },
       '/*': {
         'GET': {
-          handler: 'RouteController.view'
+          handler: 'RouteController.view',
+          config: {
+            app: {
+              cms: {
+                include: true
+              }
+            }
+          }
         }
       }
     },

@@ -1,6 +1,6 @@
 import { FabrixApp } from '@fabrix/fabrix'
 import { RenderGeneric } from '@fabrix/generics-render'
-import { clone } from 'lodash'
+import { get, clone } from 'lodash'
 
 export const Cms = {
   /**
@@ -17,25 +17,33 @@ export const Cms = {
     return Promise.resolve({})
   },
 
+  getRoutes: (app: FabrixApp) => {
+    app.routes.forEach(function(route, path, map) {
+      if (!route.GET) {
+        return
+      }
+      if (get(route.GET, 'config.app.cms.include')) {
+        app.cms.getRoutes.set(path, route)
+      }
+    })
+    app.cms.getRoutes = new Map([...app.cms.getRoutes].reverse())
+    app.log.debug('cms.getRoutes', app.cms.getRoutes)
+    return Promise.resolve({})
+  },
   /**
    * ignoreRoutes - Add ignored routes
    * @param app
    */
   ignoreRoutes: (app: FabrixApp) => {
-    // app.cms.ignoreRoutes = []
-
-    // app.config.routes.forEach((route) => {
-    //   // If the route is not a GET route
-    //   if (route.method !== 'GET' && (isObject(route.method) && route.method.indexOf('GET') == -1)) {
-    //     return
-    //   }
-    //   // If route has a config with ignore
-    //   if (route.config && route.config.app && route.config.app.cms && route.config.app.cms.ignore) {
-    //     app.cms.ignoreRoutes.push(route.path)
-    //   }
-    //   return
-    // })
-    // app.cms.ignoreRoutes.reverse()
+    app.routes.forEach(function(route, path, map) {
+      if (!route.GET) {
+        return
+      }
+      if (get(route.GET, 'config.app.cms.ignore')) {
+        app.cms.ignoreRoutes.set(path, route)
+      }
+    })
+    app.cms.ignoreRoutes = new Map([...app.cms.ignoreRoutes].reverse())
     app.log.debug('cms.ignoreRoutes', app.cms.ignoreRoutes)
     return Promise.resolve({})
   },
@@ -44,20 +52,16 @@ export const Cms = {
    * @param app
    */
   alternateRoutes: (app: FabrixApp) => {
-    // app.cms.alternateRoutes = []
-
-    // app.config.routes.forEach((route) => {
-    //   // If the route is not a GET route
-    //   if (route.method !== 'GET' && (isObject(route.method) && route.method.indexOf('GET') === -1)) {
-    //     return
-    //   }
-    //   // If route has a config with ignore
-    //   if (route.path.indexOf(':') > -1 || route.path.indexOf('*') > -1) {
-    //     app.cms.alternateRoutes.push(route.path)
-    //   }
-    //   return
-    // })
-    // app.cms.alternateRoutes.reverse()
+    app.routes.forEach(function(route, path, map) {
+      if (!route.GET) {
+        return
+      }
+      if (get(route.GET, 'config.app.cms.include') && (path.indexOf(':') > -1 || path.indexOf('*') > -1)) {
+        app.cms.alternateRoutes.set(path, route)
+      }
+    })
+    app.cms.alternateRoutes = new Map([...app.cms.alternateRoutes].reverse())
+    app.log.debug('cms.alternateRoutes', app.cms.alternateRoutes)
     return Promise.resolve({})
   },
   /**

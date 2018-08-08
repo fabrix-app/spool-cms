@@ -39,7 +39,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.pageData, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -49,7 +49,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.pageRemoveData, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -60,7 +60,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.seriesData, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -70,7 +70,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.seriesEditData, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -80,7 +80,7 @@ export const Validator = {
     return new Promise((resolve, reject) => {
       joi.validate(data, Schemas.seriesRemoveData, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -92,7 +92,7 @@ export const Validator = {
       // console.log(middlewares.order)
       joi.validate(data, Schemas.addRun, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })
@@ -104,7 +104,7 @@ export const Validator = {
       // console.log(middlewares.order)
       joi.validate(data, Schemas.controlData, (err, value) => {
         if (err) {
-          return reject(new ModelError('BAD_REQUEST', err))
+          return reject(new ModelError('E_BAD_REQUEST', err))
         }
         return resolve(value)
       })

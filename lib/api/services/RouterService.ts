@@ -39,15 +39,15 @@ export class RouterService extends Service {
     const url = req.originalUrl.replace(prefix, '')
 
     let alternative
-    req.fabrixApp.cms.alternateRoutes.forEach((route) => {
+    req.fabrixApp.cms.alternateRoutes.forEach((route, path) => {
       if (alternative) {
         return
       }
-      const re = pathToRegexp(route, [])
+      const re = pathToRegexp(path, [])
       if (re.exec(url)) {
-        this.app.log.silly('RouterService.setPreReqRoute alternative', route)
+        this.app.log.silly('RouterService.setPreReqRoute alternative', path)
         alternative = {
-          path: route,
+          path: path,
           stack: [],
           methods: { get: true }
         }
@@ -72,24 +72,25 @@ export class RouterService extends Service {
 
     // If the url is null then skip
     if (!url || url === '/null') {
+      this.app.log.silly('cms: null request')
       return false
     }
     // If a Static asset then skip
     const reg = new RegExp('^\.[\w]+$')
     if (reg.test(url)) {
-      this.app.log.silly('cms:static asset')
+      this.app.log.silly('cms: static asset request')
       return false
     }
 
     // Check if this has an explicit ignore
     let ignore = false
-    this.app.cms.ignoreRoutes.forEach((route) => {
+    this.app.cms.ignoreRoutes.forEach((route, path) => {
       // If another catchall route already ignored, break immediately
       if (ignore) {
         return
       }
       // If route has a config with ignore
-      const re = pathToRegexp(route, [])
+      const re = pathToRegexp(path, [])
       if (re.exec(url)) {
         return ignore = true
       }
@@ -98,6 +99,10 @@ export class RouterService extends Service {
     if (ignore) {
       return false
     }
+    // If this is not a cms route
+    // if (!this.app.cms.getRoutes(url)) {
+    //   return false
+    // }
     // default return true
     return true
   }
@@ -376,8 +381,8 @@ export class RouterService extends Service {
             return RouterDBService.checkIfRecord({path: regPath})
           }
         })
-        .then(isCreated => {
-          if (!isCreated) {
+        .then(_isCreated => {
+          if (!_isCreated) {
             throw new ModelError('E_NOT_FOUND', `${regPath} does not exist and can not be updated`)
           }
           return this.updatePage(pagePath, regPath, data.options)

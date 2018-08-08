@@ -485,7 +485,7 @@ export class RouterFLService extends Service {
       // The Server path
       path: path.join(
         __dirname,
-        '../../',
+        '../../../',
         this.app.config.get('cms.folder'),
         outPath.join('/')
       )
