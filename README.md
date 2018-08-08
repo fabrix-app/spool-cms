@@ -1,11 +1,13 @@
 # spool-cms
 
+[![Gitter][gitter-image]][gitter-url]
 [![NPM version][npm-image]][npm-url]
-[![Build status][ci-image]][ci-url]
+[![Build Status][ci-image]][ci-url]
+[![Test Coverage][coverage-image]][coverage-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
-[![Code Climate][codeclimate-image]][codeclimate-url]
+[![Follow @FabrixApp on Twitter][twitter-image]][twitter-url]
 
-## Content Management built for speed, scalability, testing, and love from [Cali Style Technologies](https://cali-style.com)
+## Content Management built for speed, scalability, testing, and Developer Joy
 
 The Proxy Engine Router is an Express middleware built to be used on Fabrixjs with Proxy Engine.
 It's purpose is to allow for easy development, SEO, and AAA (Triple A - Automated Analytical Assessment) testing from the ground up (a concept developed by [Scott Wyatt](https://github.com/scott-wyatt)). This means that you can automate UI testing and can still use your own controllers to handle views and add Proxy Route content to them as needed.
@@ -426,17 +428,22 @@ Renders a markdown document using Markdown-it and all the plugins configured in 
 - Support Cacheing and Cache Busting
 - Support Server Clusters for CMS functions
 
-[npm-image]: https://img.shields.io/npm/v/spool-cms.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/spool-cms
-[ci-image]: https://img.shields.io/circleci/project/github/CaliStyle/spool-cms/master.svg
-[ci-url]: https://circleci.com/gh/CaliStyle/spool-cms/tree/master
-[daviddm-image]: http://img.shields.io/david/calistyle/spool-cms.svg?style=flat-square
-[daviddm-url]: https://david-dm.org/calistyle/spool-cms
-[codeclimate-image]: https://img.shields.io/codeclimate/github/calistyle/spool-cms.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/calistyle/spool-cms
+[npm-image]: https://img.shields.io/npm/v/@fabrix/spool-cms.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@fabrix/spool-cms
+[ci-image]: https://img.shields.io/circleci/project/github/fabrix-app/spool-cms/master.svg
+[ci-url]: https://circleci.com/gh/fabrix-app/spool-cms/tree/master
+[daviddm-image]: http://img.shields.io/david/fabrix-app/spool-cms.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/fabrix-app/spool-cms
+[gitter-image]: http://img.shields.io/badge/+%20GITTER-JOIN%20CHAT%20%E2%86%92-1DCE73.svg?style=flat-square
+[gitter-url]: https://gitter.im/fabrix-app/Lobby
+[twitter-image]: https://img.shields.io/twitter/follow/FabrixApp.svg?style=social
+[twitter-url]: https://twitter.com/FabrixApp
+[coverage-image]: https://img.shields.io/codeclimate/coverage/github/fabrix-app/spool-cms.svg?style=flat-square
+[coverage-url]: https://codeclimate.com/github/fabrix-app/spool-cms/coverage
 
-[ci-sequelize-image]: https://img.shields.io/travis/fabrixjs/spool-sequelize/master.svg?style=flat-square
-[ci-sequelize-url]: https://travis-ci.org/fabrixjs/spool-sequelize
 
-[ci-express-image]: https://img.shields.io/travis/fabrixjs/spool-express/master.svg?style=flat-square
-[ci-express-url]: https://travis-ci.org/fabrixjs/spool-express
+[ci-sequelize-image]: https://img.shields.io/circleci/project/github/fabrix-app/spool-sequelize/master.svg
+[ci-sequelize-url]: https://circleci.com/gh/fabrix-app/spool-sequelize/tree/master
+
+[ci-express-image]: https://img.shields.io/circleci/project/github/fabrix-app/spool-express/master.svg
+[ci-express-url]: https://circleci.com/gh/fabrix-app/spool-express/tree/master
