@@ -79,7 +79,6 @@ describe('RouteController', () => {
       })
       .expect(200)
       .end((err, res) => {
-        console.log('BROKE', err, res.body)
         assert.equal(res.body.path, '/')
         assert.equal(res.body.series, 'c0')
         assert.equal(res.body.version, '0.0.0')

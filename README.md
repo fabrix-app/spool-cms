@@ -82,9 +82,9 @@ $ npm install --save spool-cms
 ## Configure
 
 ```js
-// config/main.js
-module.exports = {
-  packs: [
+// config/main.ts
+export const main = {
+  spools: [
     // ... other spools
     require('spool-cms')
   ]
@@ -92,21 +92,21 @@ module.exports = {
 ```
 
 ```js
-// config/web.js
+// config/web.ts
   middlewares: {
     order: [
-      ... other middleware
+      // ... other middleware
       'cms', // cms must be before router
       'router'
     ],
     cms: function(req, res, next){
-      return require('spool-cms/lib').Middleware.cms(req, res, next)
+      return require('@fabrix/spool-cms').Middleware.cms(req, res, next)
     }
   }
 ```
 ```js
-// config/cms.js
-module.exports = {
+// config/cms.ts
+export const cms = {
   // The Default Extension to use when creating/updating/reading files, falls back to either .md or .html
   default_extension: '.md',
   // Default Threshold
@@ -178,22 +178,23 @@ Proxy Route merges the document's id, series, version, and metadata with req.loc
 To access it in your template engine use the request's local variable `cms.document` and `cms.meta`
 
 ### Ignore Routes and Alternate Routes
-When the fabrix app starts, two configurations are added to fabrixApp.config.cms:
+When the fabrix app starts, three configurations are added to fabrixApp.config.cms:
+-  `getRoutes`
 - `ignoreRoutes`
 - `alternateRoutes`
 
 Ignored Routes are any routes that do not use the GET method or have an app config with ignore set to true 
 ```
-  // config/routes.js
+  // config/routes.ts
   ...
-  {
-    method: ['GET'],
-    path: '/ignore/me',
-    handler: 'IgnoreController.me',
-    config: {
-      app: {
-        cms: {
-          ignore: true
+  '/ignore/me': {
+    'GET': {
+      handler: 'IgnoreController.me',
+      config: {
+        app: {
+          cms: {
+            ignore: true
+          }
         }
       }
     }
