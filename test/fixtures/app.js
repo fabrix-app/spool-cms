@@ -48,18 +48,6 @@ const App = {
       migrate: 'drop'
     },
     routes: {
-      '/html': {
-        'GET': {
-          handler: 'RouteController.view',
-          config: {
-            app: {
-              cms: {
-                include: true
-              }
-            }
-          }
-        }
-      },
       '/hello/:world': {
         'GET': {
           handler: 'RouteController.view',
@@ -83,7 +71,36 @@ const App = {
           }
         }
       },
-      '/*': {
+      '/no/cms': {
+        'GET': {
+          handler: 'TestController.test'
+        }
+      },
+      '/html': {
+        'GET': {
+          handler: 'RouteController.view',
+          config: {
+            app: {
+              cms: {
+                include: true
+              }
+            }
+          }
+        }
+      },
+      '/json': {
+        'GET': {
+          handler: 'RouteController.view',
+          config: {
+            app: {
+              cms: {
+                include: true
+              }
+            }
+          }
+        }
+      },
+      '/': {
         'GET': {
           handler: 'RouteController.view',
           config: {

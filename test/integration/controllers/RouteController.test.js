@@ -170,4 +170,13 @@ describe('RouteController', () => {
         done(err)
       })
   })
+
+  it('should not be applied to a GET request not intended for CMS', (done) => {
+    request
+      .get('/no/cms')
+      .expect(200)
+      .end((err, res) => {
+        done(err)
+      })
+  })
 })

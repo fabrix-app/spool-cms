@@ -82,6 +82,23 @@ export class RouterService extends Service {
       this.app.log.silly('cms: static asset request')
       return false
     }
+    // Check if this has an explicit include
+    let include = false
+    this.app.cms.getRoutes.forEach((route, path) => {
+      // If another catchall route already included, break immediately
+      if (include) {
+        return
+      }
+      // If route has a config with include
+      const re = pathToRegexp(path, [])
+      if (re.exec(url)) {
+        return include = true
+      }
+    })
+    // If this route is included.
+    if (!include) {
+      return false
+    }
 
     // Check if this has an explicit ignore
     let ignore = false

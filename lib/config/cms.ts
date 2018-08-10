@@ -1,9 +1,12 @@
 /**
  * CMS Configuration
  *
- * @see {@link http://
+ * @see {@link https://github.com/fabrix-app/spool-cms}
  */
 export const cms = {
+  // Prefix for CRUD routes
+  prefix: null,
+  // Default Extension
   default_extension: '.md',
   // Default Threshold
   threshold: 100,
