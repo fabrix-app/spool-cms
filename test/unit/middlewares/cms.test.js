@@ -95,7 +95,7 @@ describe('cms middleware', () => {
         done(err)
       })
   })
-  it('should match pattern /html and serve html document ignoring url params', (done) => {
+  it.skip('should match pattern /html and serve html document ignoring url params', (done) => {
     request
       .get('/html?test=hello')
       .expect(200)

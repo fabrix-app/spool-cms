@@ -12,10 +12,10 @@ export const Schemas = {
 
   // Validate config.cms or
   cmsConfig: joi.object().keys({
+    // Prefix for crud routes
+    prefix: joi.string().allow('', null),
     // Default extension to use for files
     default_extension: joi.string().valid('.md', '.html'),
-    // Default Prefix to use
-    prefix: joi.string(),
     // Default Threshold
     threshold: joi.number().required(),
     // Default Baseline

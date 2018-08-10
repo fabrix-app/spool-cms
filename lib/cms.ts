@@ -25,6 +25,9 @@ export const Cms = {
       if (get(route.GET, 'config.app.cms.include')) {
         app.cms.getRoutes.set(path, route)
       }
+      if (get(route, 'config.app.cms.include')) {
+        app.cms.getRoutes.set(path, route)
+      }
     })
     app.cms.getRoutes = new Map([...app.cms.getRoutes].reverse())
     app.log.debug('cms.getRoutes', app.cms.getRoutes)
@@ -42,6 +45,9 @@ export const Cms = {
       if (get(route.GET, 'config.app.cms.ignore')) {
         app.cms.ignoreRoutes.set(path, route)
       }
+      if (get(route, 'config.app.cms.ignore')) {
+        app.cms.ignoreRoutes.set(path, route)
+      }
     })
     app.cms.ignoreRoutes = new Map([...app.cms.ignoreRoutes].reverse())
     app.log.debug('cms.ignoreRoutes', app.cms.ignoreRoutes)
@@ -57,6 +63,9 @@ export const Cms = {
         return
       }
       if (get(route.GET, 'config.app.cms.include') && (path.indexOf(':') > -1 || path.indexOf('*') > -1)) {
+        app.cms.alternateRoutes.set(path, route)
+      }
+      if (get(route, 'config.app.cms.include') && (path.indexOf(':') > -1 || path.indexOf('*') > -1)) {
         app.cms.alternateRoutes.set(path, route)
       }
     })

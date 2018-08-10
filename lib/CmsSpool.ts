@@ -47,11 +47,11 @@ export class CmsSpool extends ExtensionSpool {
    * Validate Dependencies and config
    */
   async validate () {
-    const requiredSpools = ['express', 'sequelize', 'caches', 'generics']
+    const requiredSpools = ['router', 'express', 'sequelize', 'caches', 'generics']
     const spools = Object.keys(this.app.spools)
 
     if (!spools.some(v => requiredSpools.indexOf(v) >= 0)) {
-      return Promise.reject(new Error(`spool-sitemap requires spools: ${ requiredSpools.join(', ') }!`))
+      return Promise.reject(new Error(`spool-cms requires spools: ${ requiredSpools.join(', ') }!`))
     }
 
     if (!this.app.config.get('cms')) {
