@@ -121,9 +121,8 @@ const App = {
         require('@fabrix/spool-email').EmailSpool,
         require('@fabrix/spool-generics').GenericsSpool,
         require('@fabrix/spool-passport').PassportSpool,
+        require('@fabrix/spool-crons').CronsSpool,
         require('@fabrix/spool-permissions').PermissionsSpool,
-        // require('@fabrix/spool-notifications').NotificationsSpool,
-        require('@fabrix/spool-engine').EngineSpool,
         require('@fabrix/spool-sitemap').SitemapSpool,
         require('@fabrix/spool-caches').CachesSpool,
         require('../../dist').CmsSpool // spool-cms
@@ -202,10 +201,6 @@ const App = {
       defaults: ['memory']
     },
     generics: {},
-    engine: {
-      live_mode: false,
-      profile: 'test'
-    },
     passport: {
       strategies: {
         local: {
